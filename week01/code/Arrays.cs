@@ -13,7 +13,18 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        // We need an array called multiples with length = int length
+        // We could use a list, but a fixed length array represents a better memory use
+        // this is an array of elements with type <double> because this is the type of the number we receive 
+        double[] multiples = new double[length];
+        // Then we need to run a loop to multiply "number" "length" times
+        for (int i=0; i< length; i++){
+            // we run through each position in the fixed array multiples[] using i
+            // we multiply number by i+1 because i starts at 0, when we really need to start multiplying number by 1
+            multiples[i] = number * (i+1);
+        }
+        return multiples; 
+        // we return the complete array
     }
 
     /// <summary>
@@ -29,5 +40,19 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+    
+        //  We need an empty List<int> element for the rotated list
+        List<int> rotated = new List<int>();
+        // We split the data list in two using amount and we store them in two temporal lists
+        List<int> firstElements = data.GetRange(0, amount);
+        List<int> lastElements = data.GetRange(amount, data.Count - amount);
+        // We put them together in the new list rotated
+        rotated.AddRange(lastElements); 
+        // Add lastElements first
+        rotated.AddRange(firstElements); 
+        // Add firstElements last
+        
+    
+    
     }
 }
