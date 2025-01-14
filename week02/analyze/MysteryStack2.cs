@@ -1,5 +1,6 @@
 ﻿public static class MysteryStack2 {
     private static bool IsFloat(string text) {
+        // tries to parse string Text into a float value and returns true or false, depending if it is a float or not
         return float.TryParse(text, out _);
     }
 
@@ -47,3 +48,6 @@
         return stack.Pop();
     }
 }
+
+// if input = 5 3 7 + * the result is 50
+// if input = 6 2 + 5 3 - / the result is 4
