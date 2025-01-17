@@ -13,6 +13,7 @@ public class TakingTurnsQueueTests
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
     // Defect(s) Found: 
     public void TestTakingTurnsQueue_FiniteRepetition()
+    // Error: Bob expected, but it is Sue
     {
         var bob = new Person("Bob", 2);
         var tim = new Person("Tim", 5);
@@ -45,6 +46,7 @@ public class TakingTurnsQueueTests
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, George, Sue, Tim, George, Tim, George
     // Defect(s) Found: 
     public void TestTakingTurnsQueue_AddPlayerMidway()
+    // error: Bob expected but is Sue 
     {
         var bob = new Person("Bob", 2);
         var tim = new Person("Tim", 5);
@@ -87,6 +89,7 @@ public class TakingTurnsQueueTests
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
     // Defect(s) Found: 
     public void TestTakingTurnsQueue_ForeverZero()
+    // Error: Bob expected but it is Sue
     {
         var timTurns = 0;
 
@@ -118,6 +121,7 @@ public class TakingTurnsQueueTests
     // Expected Result: Tim, Sue, Tim, Sue, Tim, Sue, Tim, Tim, Tim, Tim
     // Defect(s) Found: 
     public void TestTakingTurnsQueue_ForeverNegative()
+    // Error: Tim expected, but it is Sue
     {
         var timTurns = -3;
         var tim = new Person("Tim", timTurns);

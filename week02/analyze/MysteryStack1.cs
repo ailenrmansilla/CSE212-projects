@@ -12,6 +12,6 @@
         return result;
         // if text = racecar then result = racecar
         // if text = stressed then result = desserts
-        // if text = a nut for a jar of tuna then result = tuna of jat a for nut a
+        // if text = a nut for a jar of tuna then result = anut fo raj a rof tun a
     }
 }
