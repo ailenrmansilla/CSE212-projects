@@ -21,7 +21,7 @@ public class TakingTurnsQueue
     public void AddPerson(string name, int turns)
     {
         var person = new Person(name, turns);
-        _people.Enqueue(person);
+        _people.Enqueue(person); // adds the person
     }
 
     /// <summary>
@@ -39,13 +39,15 @@ public class TakingTurnsQueue
         }
         else
         {
-            Person person = _people.Dequeue();
-            if (person.Turns > 1)
+            Person person = _people.Dequeue(); // get the first name in the queue
+            if (person.Turns > 1) // if turns == 1 they wont be readded here or in the next if
             {
                 person.Turns -= 1;
-                _people.Enqueue(person);
+                _people.Enqueue(person); // add to the back of the queue
             }
-
+            else if(person.Turns <= 0){
+                _people.Enqueue(person); // readds them. Infinite turns
+            }
             return person;
         }
     }
