@@ -1,5 +1,20 @@
+using System.ComponentModel;
+
+// the collection we'll deserialize
 public class FeatureCollection
 {
-    // TODO Problem 5 - ADD YOUR CODE HERE
-    // Create additional classes as necessary
+    public List<Feature> Features { get; set; }
+}
+
+// every singular pair of location and magnitude
+public class Feature
+{
+    public Properties Properties {get; set;}
+}
+
+// we'll need a list of places and magnitudes
+public class Properties
+{
+    public string Place {get; set;}
+    public double Mag { get; set;}
 }
