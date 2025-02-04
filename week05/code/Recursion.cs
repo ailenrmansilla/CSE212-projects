@@ -15,7 +15,12 @@ public static class Recursion
     public static int SumSquaresRecursive(int n)
     {
         // TODO Start Problem 1
-        return 0;
+        if (n <= 0){
+            return 0;
+        }
+        else{
+            return SumSquaresRecursive(n-1) + n*n;
+        }
     }
 
     /// <summary>
@@ -40,6 +45,23 @@ public static class Recursion
     public static void PermutationsChoose(List<string> results, string letters, int size, string word = "")
     {
         // TODO Start Problem 2
+        // Base case: If the length of the current word equals the desired size, add it to results
+        if (word.Length == size)
+        {
+            results.Add(word);
+            return;
+        }
+        // Recursive case: Try each letter in the available letters
+        for (int i = 0; i < letters.Length; i++)
+        {
+            // Create a new string without the chosen letter
+            string remaining = letters.Remove(i, 1);
+
+            // Recursively build the word with the chosen letter
+            PermutationsChoose(results, remaining, size, word + letters[i]);
+        }
+
+
     }
 
     /// <summary>
@@ -98,8 +120,20 @@ public static class Recursion
 
         // TODO Start Problem 3
 
-        // Solve using recursion
-        decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
+        // If this is the first time calling the function, then
+        // we need to create the dictionary.
+        if (remember == null)
+         {remember = new Dictionary<int, decimal>();}
+
+        // Check if we have solved this one before
+        if (remember.ContainsKey(s))
+           { return remember[s];}
+
+        // Solve using recursion while passing down 'remember' for memoization
+        decimal ways = CountWaysToClimb(s - 1, remember) + CountWaysToClimb(s - 2, remember) + CountWaysToClimb(s - 3, remember);
+        // store the value for future use
+        remember[s] = ways;
+
         return ways;
     }
 
@@ -119,12 +153,28 @@ public static class Recursion
     public static void WildcardBinary(string pattern, List<string> results)
     {
         // TODO Start Problem 4
+        // Find the first wildcard '*' using the string function IndexOF
+        int index = pattern.IndexOf('*');
+
+        // indexof returns -1 when doesn't find the character
+        if(index == -1){
+            // If no '*' is left, add the complete binary string to results
+            results.Add(pattern);
+            return;
+        }
+        // parameters: substring before that index + 0 or 1 + substring after that index, existimg results
+        WildcardBinary(pattern[..index] + "0" + pattern[(index + 1)..], results);
+        WildcardBinary(pattern[..index] + "1" + pattern[(index + 1)..], results);
+
     }
 
     /// <summary>
     /// Use recursion to insert all paths that start at (0,0) and end at the
     /// 'end' square into the results list.
     /// </summary>
+
+
+
     public static void SolveMaze(List<string> results, Maze maze, int x = 0, int y = 0, List<ValueTuple<int, int>>? currPath = null)
     {
         // If this is the first time running the function, then we need
