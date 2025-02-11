@@ -12,7 +12,9 @@ public class Node
     public void Insert(int value)
     {
         // TODO Start Problem 1
-
+        if (value == Data){
+            return; // we do nothing if that value is already in the tree
+        }
         if (value < Data)
         {
             // Insert to the left
@@ -34,12 +36,35 @@ public class Node
     public bool Contains(int value)
     {
         // TODO Start Problem 2
+        if (value == Data){
+            // if current value matches, return true
+            return true;
+        }
+        if (value < Data){
+            if (Left is null){
+                return false;
+            } else {
+               return Left.Contains(value);
+            }
+        }
+        if (value > Data){
+            if (Right is null){
+                return false;
+            } else {
+                return Right.Contains(value);
+            }
+        }
         return false;
     }
 
-    public int GetHeight()
+    public int GetHeight(Node? node)
     {
         // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        if (node == null){
+            return 0;
+        }
+        int leftHeight = GetHeight(node.Left); // recursive call
+        int rightHeight = GetHeight(node.Right);
+        return 1 + Math.Max(leftHeight, rightHeight); // returns 1 plus the highest value from right or left
     }
 }
