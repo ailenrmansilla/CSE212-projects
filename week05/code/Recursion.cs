@@ -1,4 +1,5 @@
 using System.Collections;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 public static class Recursion
 {
@@ -180,14 +181,36 @@ public static class Recursion
         // If this is the first time running the function, then we need
         // to initialize the currPath list.
         if (currPath == null) {
-            currPath = new List<ValueTuple<int, int>>();
+            currPath = new();
         }
-        
+
         // currPath.Add((1,2)); // Use this syntax to add to the current path
 
         // TODO Start Problem 5
-        // ADD CODE HERE
+        //base case
+        if (maze.IsEnd(x,y)){
+            results.Add(currPath.AsString());
+            return;
+        }
+        // check if x,y is within the maze boundaries
+        if(x < 0 || y < 0 || x >= maze.Width || y >= maze.Height){
+            return; // not valid
+        }
 
-        // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
+
+        // check if position x,y is a valid move
+        if(!maze.IsValidMove(currPath, x,y)){
+            return; // not valid move
+        }
+        else{
+            currPath.Add((x,y));
+        }
+
+        // Recursively explore all possible moves
+        SolveMaze(results, maze, x+1, y, new List<(int, int)>(currPath));
+        SolveMaze(results, maze, x-1, y, new List<(int, int)>(currPath));
+        SolveMaze(results, maze, x, y+1, new List<(int, int)>(currPath));
+        SolveMaze(results, maze, x, y-1, new List<(int, int)>(currPath));
     }
-}
+        }
+        // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
