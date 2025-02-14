@@ -49,5 +49,11 @@ public static class Trees
     private static void InsertMiddle(int[] sortedNumbers, int first, int last, BinarySearchTree bst)
     {
         // TODO Start Problem 5
+        if (first > last){ return;} // it stops when it's out of range (base case)
+        // if indexes are not out of range, we execute the insertion
+        int middle = (first + last)/2; // find the middle index
+        bst.Insert(sortedNumbers[middle]); 
+        InsertMiddle(sortedNumbers, first, middle-1, bst); // recursively go through left tree first
+        InsertMiddle(sortedNumbers, middle+1, last, bst);
     }
 }
